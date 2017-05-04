@@ -1,6 +1,7 @@
 package com.smedialink.abakarmagomedov.neyro;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,21 +29,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Bitmap bitmap = drawable.obtainBitmap();
-                int[] pixels = new int[drawable.obtainBitmap().getByteCount()];
-                bitmap.getPixels(pixels,0,0,0,bitmap.getByteCount(), bitmap.getWidth(), bitmap.getHeight());
-                for(int i = 0; i < pixels.length; i++){
-                    Log.d("INFO", "Pixel " + i + "--- " + pixels[i] + " ---");
+                int [] allpixels = new int [bitmap.getHeight()*bitmap.getWidth()];
+                for(int i = 0; i < allpixels.length; i++){
+                        Log.d("Color", "Pixel " + i + " Is " + allpixels[i]);
                 }
             }
         });
-
     }
 
 
     public void init(){
         DrawableViewConfig config = new DrawableViewConfig();
-        config.setStrokeColor(getResources().getColor(android.R.color.black));
-        config.setShowCanvasBounds(true); // If the view is bigger than canvas, with this the user will see the bounds (Recommended)
+        config.setStrokeColor(Color.BLACK);
+        //config.setShowCanvasBounds(true); // If the view is bigger than canvas, with this the user will see the bounds (Recommended)
         config.setStrokeWidth(20.0f);
         config.setMinZoom(1.0f);
         config.setMaxZoom(3.0f);
