@@ -56,4 +56,23 @@ public class MainActivity extends AppCompatActivity {
         config.setCanvasWidth(1920);
         drawable.setConfig(config);
     }
+
+    public void findFirstExist(int[] bitmap, int[] neuroMemory){
+
+        int positionOfFirstBlackPixel;
+
+        for(int i = 0; i < bitmap.length; i++){
+            if(bitmap[i] == Color.BLACK){
+                positionOfFirstBlackPixel = i;
+                findSimilarMask(bitmap, neuroMemory, positionOfFirstBlackPixel);
+                break;
+            }
+        }
+
+    }
+
+
+    public void findSimilarMask(int[] bitmap, int[] neuroMemory, int positionOfFirstBlackPixel){
+        
+    }
 }
