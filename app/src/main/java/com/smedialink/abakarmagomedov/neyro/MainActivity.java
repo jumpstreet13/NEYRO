@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void init() {
         DrawableViewConfig config = new DrawableViewConfig();
         config.setStrokeColor(Color.BLACK);
@@ -57,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
         drawable.setConfig(config);
     }
 
-    public void findFirstExist(int[] bitmap, int[] neuroMemory){
+    public void findFirstExist(int[] bitmap, Neuro neuro) {
 
         int positionOfFirstBlackPixel;
 
-        for(int i = 0; i < bitmap.length; i++){
-            if(bitmap[i] == Color.BLACK){
+        for (int i = 0; i < bitmap.length; i++) {
+            if (bitmap[i] == Color.BLACK) {
                 positionOfFirstBlackPixel = i;
-                findSimilarMask(bitmap, neuroMemory, positionOfFirstBlackPixel);
+                findSimilarMask(bitmap, neuro, positionOfFirstBlackPixel);
                 break;
             }
         }
@@ -72,7 +71,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void findSimilarMask(int[] bitmap, int[] neuroMemory, int positionOfFirstBlackPixel){
-        
+    public void findSimilarMask(int[] bitmap, Neuro neuro, int positionOfFirstBlackPixel) {
+
+
+
     }
+
+
 }
