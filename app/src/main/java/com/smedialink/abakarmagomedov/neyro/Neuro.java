@@ -12,6 +12,7 @@ public class Neuro {
     private Integer output;
     private ArrayList<Integer> input;
     private ArrayList<Integer> memory;
+    private int weight;
 
     public Neuro() {
     }
@@ -23,6 +24,13 @@ public class Neuro {
         this.memory = memory;
     }
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 
     public String getName() {
         return name;

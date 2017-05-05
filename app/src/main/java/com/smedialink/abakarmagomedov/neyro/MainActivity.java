@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawableView drawable;
     private Button doneButton;
+    private int[] allpixels;
+    private Neuro[] mNeuros = new Neuro[33];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +30,22 @@ public class MainActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap = drawable.obtainBitmap();
-                int [] allpixels = new int [bitmap.getHeight()*bitmap.getWidth()];
-                for(int i = 0; i < allpixels.length; i++){
-                        Log.d("Color", "Pixel " + i + " Is " + allpixels[i]);
-                }
+                getAllPixels();
+
             }
         });
     }
 
+    public void getAllPixels() {
+        Bitmap bitmap = drawable.obtainBitmap();
+        allpixels = new int[bitmap.getHeight() * bitmap.getWidth()];
+        for (int i = 0; i < allpixels.length; i++) {
+            Log.d("Color", "Pixel " + i + " Is " + allpixels[i]);
+        }
+    }
 
-    public void init(){
+
+    public void init() {
         DrawableViewConfig config = new DrawableViewConfig();
         config.setStrokeColor(Color.BLACK);
         //config.setShowCanvasBounds(true); // If the view is bigger than canvas, with this the user will see the bounds (Recommended)
