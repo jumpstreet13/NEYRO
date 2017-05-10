@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button doneButton;
     private int[] allpixels;
     private Neuro[] mNeuros = new Neuro[33];
+    private int positionOfFirstBlackPixel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +32,16 @@ public class MainActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getAllPixels();
-
+                allpixels = getAllPixels();
+                positionOfFirstBlackPixel = findFirstExist(allpixels);
+                
             }
         });
     }
 
-    private void getAllPixels() {
+    private int[] getAllPixels() {
         Bitmap bitmap = drawable.obtainBitmap();
-        allpixels = new int[bitmap.getHeight() * bitmap.getWidth()];
-        for (int i = 0; i < allpixels.length; i++) {
-            Log.d("Color", "Pixel " + i + " Is " + allpixels[i]);
-        }
+        return new int[bitmap.getHeight() * bitmap.getWidth()];
     }
 
     private void init() {
@@ -57,27 +56,24 @@ public class MainActivity extends AppCompatActivity {
         drawable.setConfig(config);
     }
 
-    private void findFirstExist(int[] bitmap, Neuro neuro) {
-
-        int positionOfFirstBlackPixel;
+    private int findFirstExist(int[] bitmap) {
 
         for (int i = 0; i < bitmap.length; i++) {
             if (bitmap[i] == Color.BLACK) {
-                positionOfFirstBlackPixel = i;
-               // findSimilarMask(bitmap, neuro, positionOfFirstBlackPixel);
-                break;
+                return i;
             }
         }
-
+        return -1;
     }
 
 
     private boolean findSimilarMask(int[] bitmap, Neuro neuro, int positionOfFirstBlackPixel) {
         for (int i = 0; i < neuro.getMemory().size(); i++) {
-            if (neuro.getMemory().get(i) == Color.BLACK) {
-                //makeStrafeIfNeed(bitmap, i - positionOfFirstBlackPixel);
+            if (neuro.getMemory().get(i) == Color.BLACK && i - positionOfFirstBlackPixel != 0) {
+                return true;
             }
         }
+        return false;
     }
 
     private void makeStrafeIfNeed(int[] bitmap, int step) {
@@ -89,6 +85,5 @@ public class MainActivity extends AppCompatActivity {
                 bitmap[i] = 0;
             }
         }
-
     }
 }
