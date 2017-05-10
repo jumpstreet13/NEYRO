@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import me.panavtec.drawableview.DrawableView;
 import me.panavtec.drawableview.DrawableViewConfig;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void getAllPixels() {
+    private void getAllPixels() {
         Bitmap bitmap = drawable.obtainBitmap();
         allpixels = new int[bitmap.getHeight() * bitmap.getWidth()];
         for (int i = 0; i < allpixels.length; i++) {
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void init() {
+    private void init() {
         DrawableViewConfig config = new DrawableViewConfig();
         config.setStrokeColor(Color.BLACK);
         //config.setShowCanvasBounds(true); // If the view is bigger than canvas, with this the user will see the bounds (Recommended)
@@ -56,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
         drawable.setConfig(config);
     }
 
-    public void findFirstExist(int[] bitmap, Neuro neuro) {
+    private void findFirstExist(int[] bitmap, Neuro neuro) {
 
         int positionOfFirstBlackPixel;
 
         for (int i = 0; i < bitmap.length; i++) {
             if (bitmap[i] == Color.BLACK) {
                 positionOfFirstBlackPixel = i;
-                findSimilarMask(bitmap, neuro, positionOfFirstBlackPixel);
+               // findSimilarMask(bitmap, neuro, positionOfFirstBlackPixel);
                 break;
             }
         }
@@ -71,11 +72,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void findSimilarMask(int[] bitmap, Neuro neuro, int positionOfFirstBlackPixel) {
-
-
-
+    private boolean findSimilarMask(int[] bitmap, Neuro neuro, int positionOfFirstBlackPixel) {
+        for (int i = 0; i < neuro.getMemory().size(); i++) {
+            if (neuro.getMemory().get(i) == Color.BLACK) {
+                //makeStrafeIfNeed(bitmap, i - positionOfFirstBlackPixel);
+            }
+        }
     }
 
+    private void makeStrafeIfNeed(int[] bitmap, int step) {
+        if (step == 0) return;
 
+        for (int i = 0; i < bitmap.length; i++) {
+            if (bitmap[i] == Color.BLACK) {
+                bitmap[i - step] = Color.BLACK;
+                bitmap[i] = 0;
+            }
+        }
+
+    }
 }
